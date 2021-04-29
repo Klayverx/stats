@@ -1,5 +1,5 @@
-function App() {
-	return <h1>Page stats</h1>;
-}
+import Routes from './routes';
+
+const App = () => <Routes />;
 
 export default App;
