@@ -9,7 +9,7 @@ export default function Login() {
 			<h1>Page login</h1>
 			<button>
 				<a
-					href="https://www.strava.com/oauth/authorize?client_id=65376&redirect_uri=https://stats-kx.vercel.app/home&response_type=code&scope=read_all,activity%3Aread_all,activity%3Awrite,profile%3Aread_all,profile%3Awrite"
+					href="https://www.strava.com/oauth/authorize?client_id=65376&redirect_uri=http://localhost:3000/home&response_type=code&scope=read_all,activity%3Aread_all,activity%3Awrite,profile%3Aread_all,profile%3Awrite"
 					target="_blank"
 					rel="noreferrer"
 				>
