@@ -9,12 +9,12 @@ export const apiToken = axios.create({
 	baseURL: 'https://www.strava.com/oauth/',
 });
 
-// api.interceptors.request.use(async config => {
-//     const token = getToken();
+// api.interceptors.request.use(async request => {
+// 	const token = localStorage.getItem('access_token');
 
-//     if(token) {
-//         config.headers.Authorization  = `Bearer ${token}`
-//     }
+// 	if (token) {
+// 		request.headers.Authorization = `Bearer ${token}`;
+// 	}
 
-//     return config;
-// })
+// 	return request;
+// });
