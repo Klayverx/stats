@@ -3,6 +3,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import Login from './pages/Login';
 import Home from './pages/Home';
+import Auth from './pages/Auth';
 import NotFound from './pages/NotFound';
 
 function Routes() {
@@ -11,6 +12,7 @@ function Routes() {
 			<Switch>
 				<Route exact path="/" component={Login} />
 				<Route path="/home" component={Home} />
+				<Route path="/auth" component={Auth} />
 				<Route component={NotFound} />
 			</Switch>
 		</BrowserRouter>
