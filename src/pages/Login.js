@@ -1,19 +1,14 @@
 import React from 'react';
 import {useHistory} from 'react-router';
-// import Home from './Home';
 
 export default function Login() {
 	const redirect_uri = 'http://localhost:3000/auth';
-	const scope = 'read,profile:read_all,activity:read,activity:write';
+	const scope = 'read,profile:read_all,activity:read_all,activity:write';
 
 	const history = useHistory();
-	// const token = localStorage.getItem('access_token');
 
 	return (
 		<>
-			{/* {token ? (
-				<Home />
-			) : ( */}
 			<div>
 				<h1>Page login</h1>
 				<button>
@@ -29,7 +24,6 @@ export default function Login() {
 					Ir para home
 				</button>
 			</div>
-			{/* )} */}
 		</>
 	);
 }

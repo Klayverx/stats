@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import { getToken } from './auth';
 
 export const api = axios.create({
 	baseURL: 'https://www.strava.com/api/v3/',
