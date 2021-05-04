@@ -17,13 +17,12 @@ import Trophy from '../assets/icons/trophy.svg';
 import Cyclist from '../assets/icons/cyclist.svg';
 import Cyclists from '../assets/icons/cyclists.svg';
 
-import MapBackgroud from '../assets/map-background.png';
+// import MapBackgroud from '../assets/map-background.png';
 
 import {api} from '../services/api';
 import {Grid} from '@chakra-ui/layout';
 import {GridItem} from '@chakra-ui/layout';
 import {Divider} from '@chakra-ui/layout';
-import {Box} from '@chakra-ui/layout';
 import {Container} from '@chakra-ui/layout';
 import {Center} from '@chakra-ui/layout';
 
@@ -290,12 +289,14 @@ function Home() {
 								<Text fontSize="xl" fontWeight="bold" mb={2}>
 									Última atividade 🚲
 								</Text>
-								<Text fontSize="lg">Título: Angicos ☁️</Text>
+								<Text fontSize="lg" lineHeight={3}>
+									Título: Angicos ☁️
+								</Text>
 								<Text fontSize="lg">Distância: 49,3 km</Text>
 								<Text fontSize="lg">Elevação: 441 m</Text>
 								<Text fontSize="lg">Kudos: 23</Text>
 								<Text fontSize="lg">Vel. média: 18,3 km/h</Text>
-								<Text fontSize="lg">Vel. média: 18,3 km/h</Text>
+								<Text fontSize="lg">Vel. média: 36,4 km/h</Text>
 							</Flex>
 						</GridItem>
 					</Grid>
