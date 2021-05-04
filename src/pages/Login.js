@@ -2,7 +2,8 @@ import React from 'react';
 
 import {Button} from '@chakra-ui/button';
 import {Image} from '@chakra-ui/image';
-import {Box, Center, Flex, Heading, Spacer, Text} from '@chakra-ui/layout';
+import {Box, Flex, Heading, Spacer, Text} from '@chakra-ui/layout';
+import {Stack} from '@chakra-ui/layout';
 
 import ImgLogin from '../assets/profile.png';
 import Stats from '../assets/stats-white.png';
@@ -12,7 +13,6 @@ import Map from '../assets/icons/map.svg';
 import MapPin from '../assets/icons/map-pin.svg';
 import Activity from '../assets/icons/activity.svg';
 import Sun from '../assets/icons/sun.svg';
-import {Stack} from '@chakra-ui/layout';
 
 export default function Login() {
 	// https://stats-kx.vercel.app/

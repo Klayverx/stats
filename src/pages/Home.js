@@ -1,15 +1,13 @@
 import React, {useEffect, useState} from 'react';
+import SideBar from '../components/SideBar';
 
 import {api} from '../services/api';
 
 function Home(props) {
 	const access_token = localStorage.getItem('access_token');
 
-	const [firstName, setFirstName] = useState('');
-	const [lastName, setLastName] = useState('');
-	const [imgProfile, setImageProfile] = useState('');
-	const [city, setCity] = useState('');
-	const [state, setState] = useState('');
+	const [dataAthlete, setDataAthlete] = useState({});
+	const [dataClubs, setDataClubs] = useState({});
 
 	useEffect(() => {
 		api.get('athlete', {
@@ -17,23 +15,24 @@ function Home(props) {
 				Authorization: `Bearer ${access_token}`,
 			},
 		}).then(resp => {
-			setFirstName(resp.data.firstname);
-			setLastName(resp.data.lastname);
-			setImageProfile(resp.data.profile);
-			setCity(resp.data.city);
-			setState(resp.data.state);
+			setDataAthlete(resp.data);
+		});
+
+		api.get('athlete/clubs', {
+			headers: {
+				Authorization: `Bearer ${access_token}`,
+			},
+		}).then(resp => {
+			setDataClubs(resp.data);
 		});
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
-		<div>
-			Home page - {firstName}, {lastName}, {city}, {state}
-			<br />
-			<br />
-			<img src={imgProfile} alt="Perfil"></img>
-		</div>
+		<>
+			<SideBar dataAthlete={dataAthlete} />
+		</>
 	);
 }
 
