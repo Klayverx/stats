@@ -59,8 +59,8 @@ export default function Auth() {
 		<>
 			{/* {error ? ( */}
 			<>
-				<h1>Page Auth - Algo de errado não está certo</h1>
-				<button onClick={() => history.push('/')}>Ir para login</button>
+				<h1>Loading...</h1>
+				{/* <button onClick={() => history.push('/')}>Ir para login</button> */}
 			</>
 			{/* ) : (
 				<h1>Loading...</h1>

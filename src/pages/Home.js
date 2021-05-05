@@ -57,7 +57,7 @@ function Home() {
 					Math.floor(resp.data.all_ride_totals.distance / 1000)
 				);
 				setElevationGain(
-					Math.floor(resp.data.all_ride_totals.elevation_gain / 100)
+					Math.floor(resp.data.all_ride_totals.elevation_gain / 10)
 				);
 				setBiggestRide(
 					Math.floor(resp.data.biggest_ride_distance / 1000)
@@ -124,6 +124,7 @@ function Home() {
 					</Flex>
 
 					<Spacer />
+
 					<Flex direction="column" h="60vh" pb={4} align="center">
 						<Link>
 							<Image
@@ -142,7 +143,9 @@ function Home() {
 								Conquistas
 							</Text>
 						</Link>
+
 						<Spacer />
+
 						<Link>
 							<Image
 								src={Bicycle}
@@ -154,7 +157,9 @@ function Home() {
 								Equipamentos
 							</Text>
 						</Link>
+
 						<Spacer />
+
 						<Text color="white" fontSize={12} pb={2}>
 							Feito por{' '}
 							<a
@@ -194,6 +199,7 @@ function Home() {
 							color="white"
 							borderRadius="2xl"
 							direction="row"
+							shadow="dark-lg"
 						>
 							<Flex h="100%" align="center">
 								<Container align="center">
@@ -235,6 +241,7 @@ function Home() {
 							bg="primary"
 							color="white"
 							borderRadius="2xl"
+							shadow="dark-lg"
 						>
 							<Flex h="100%" align="center">
 								<Container align="center">
@@ -275,6 +282,7 @@ function Home() {
 							bg="primary"
 							color="white"
 							borderRadius="2xl"
+							shadow="dark-lg"
 						>
 							<Flex h="100%" align="center">
 								<Container align="center">
@@ -299,6 +307,7 @@ function Home() {
 							bg="primary"
 							color="white"
 							borderRadius="2xl"
+							shadow="dark-lg"
 						>
 							<Flex h="100%" align="center">
 								<Container align="center">
@@ -326,6 +335,7 @@ function Home() {
 							bg="primary"
 							color="white"
 							borderRadius="2xl"
+							shadow="dark-lg"
 						>
 							<Flex p={8} direction="column">
 								<Text fontSize="xl" fontWeight="bold" mb={2}>
