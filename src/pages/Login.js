@@ -96,7 +96,6 @@ export default function Login() {
 				>
 					<a
 						href={`https://www.strava.com/oauth/authorize?client_id=65376&redirect_uri=${redirect_uri}&response_type=code&scope=${scope}`}
-						target="_blank"
 						rel="noreferrer"
 					>
 						Fazer login com o Strava

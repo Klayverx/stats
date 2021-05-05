@@ -31,6 +31,8 @@ function Home() {
 
 	const [dataAthlete, setDataAthlete] = useState({});
 	const [dataClubs, setDataClubs] = useState({});
+	const [statsAthlete, setStatsAthlete] = useState({});
+	const [athleteActivities, setAthleteActivities] = useState({});
 
 	useEffect(() => {
 		api.get('athlete', {
@@ -39,6 +41,15 @@ function Home() {
 			},
 		}).then(resp => {
 			setDataAthlete(resp.data);
+
+			api.get(`athletes/${dataAthlete.id}/stats`, {
+				headers: {
+					Authorization: `Bearer ${access_token}`,
+				},
+			}).then(resp => {
+				setStatsAthlete(resp.data);
+				console.log(resp.data);
+			});
 		});
 
 		api.get('athlete/clubs', {
@@ -49,8 +60,18 @@ function Home() {
 			setDataClubs(resp.data);
 		});
 
+		api.get('athlete/activities', {
+			headers: {
+				Authorization: `Bearer ${access_token}`,
+			},
+		}).then(resp => {
+			setAthleteActivities(resp.data);
+		});
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	// console.log(statsAthlete.all_ride_totals.distance);
 
 	return (
 		<>
@@ -120,7 +141,13 @@ function Home() {
 						</Link>
 						<Spacer />
 						<Text color="white" fontSize={12} pb={2}>
-							Feito por <Link>Klayver KOM 👑</Link>
+							Feito por{' '}
+							<a
+								href="https://www.instagram.com/klayverxd/?hl=pt-br"
+								rel="noreferrer"
+							>
+								Klayver KOM 👑
+							</a>
 						</Text>
 					</Flex>
 				</VStack>
@@ -161,7 +188,10 @@ function Home() {
 									<Spacer />
 									<Center alignItems="baseline">
 										<Text fontSize="5xl" fontWeight="bold">
-											9.607
+											{Math.floor(
+												statsAthlete.all_ride_totals
+													.distance / 1000
+											)}
 										</Text>
 										<Text fontSize="2xl" fontWeight="bold">
 											{' '}
@@ -177,7 +207,10 @@ function Home() {
 									<Spacer />
 									<Center alignItems="baseline">
 										<Text fontSize="5xl" fontWeight="bold">
-											2.987
+											{Math.floor(
+												statsAthlete.all_ride_totals
+													.elevation_gain / 100
+											)}
 										</Text>
 										<Text fontSize="2xl" fontWeight="bold">
 											{' '}
@@ -202,7 +235,10 @@ function Home() {
 									<Spacer />
 									<Center alignItems="baseline">
 										<Text fontSize="5xl" fontWeight="bold">
-											200
+											{Math.floor(
+												statsAthlete.biggest_ride_distance /
+													1000
+											)}
 										</Text>
 										<Text fontSize="2xl" fontWeight="bold">
 											km
@@ -217,7 +253,9 @@ function Home() {
 									<Spacer />
 									<Center alignItems="baseline">
 										<Text fontSize="5xl" fontWeight="bold">
-											848
+											{Math.floor(
+												statsAthlete.biggest_climb_elevation_gain
+											)}
 										</Text>
 										<Text fontSize="2xl" fontWeight="bold">
 											{' '}
@@ -245,7 +283,7 @@ function Home() {
 									</Text>
 									<Center>
 										<Text fontSize="5xl" fontWeight="bold">
-											270
+											{statsAthlete.all_ride_totals.count}
 										</Text>
 									</Center>
 								</Container>
@@ -270,7 +308,7 @@ function Home() {
 
 									<Center>
 										<Text fontSize="5xl" fontWeight="bold">
-											19
+											{dataClubs.length}
 										</Text>
 									</Center>
 								</Container>
@@ -289,14 +327,43 @@ function Home() {
 								<Text fontSize="xl" fontWeight="bold" mb={2}>
 									Última atividade 🚲
 								</Text>
-								<Text fontSize="lg" lineHeight={3}>
-									Título: Angicos ☁️
+								<Text fontSize="lg" lineHeight={8}>
+									Título: {athleteActivities[0].name}
 								</Text>
-								<Text fontSize="lg">Distância: 49,3 km</Text>
-								<Text fontSize="lg">Elevação: 441 m</Text>
-								<Text fontSize="lg">Kudos: 23</Text>
-								<Text fontSize="lg">Vel. média: 18,3 km/h</Text>
-								<Text fontSize="lg">Vel. média: 36,4 km/h</Text>
+								<Text fontSize="lg" lineHeight={8}>
+									Distância:{' '}
+									{Math.floor(
+										athleteActivities[0].distance / 1000
+									)}{' '}
+									km
+								</Text>
+								<Text fontSize="lg" lineHeight={8}>
+									Elevação:{' '}
+									{Math.floor(
+										athleteActivities[0]
+											.total_elevation_gain
+									)}{' '}
+									m
+								</Text>
+								<Text fontSize="lg" lineHeight={8}>
+									Kudos: {athleteActivities[0].kudos_count}
+								</Text>
+								<Text fontSize="lg" lineHeight={8}>
+									Vel. média:{' '}
+									{Math.floor(
+										athleteActivities[0].average_speed * 3,
+										6
+									)}{' '}
+									km/h
+								</Text>
+								<Text fontSize="lg" lineHeight={8}>
+									Vel. máxima:{' '}
+									{Math.floor(
+										athleteActivities[0].max_speed * 3,
+										6
+									)}{' '}
+									km/h
+								</Text>
 							</Flex>
 						</GridItem>
 					</Grid>
