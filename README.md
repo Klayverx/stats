@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+<div align="center">
+  <img src=".github/stats-logo.png" alt="Stats logo" width="180px">
+</div>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Stats
 
-## Available Scripts
+[![Author](https://img.shields.io/badge/author-Klayverx-FC4C02?style=flat-square)](https://github.com/Klayverx)
+[![Languages](https://img.shields.io/github/languages/count/Klayverx/stats?color=%FC4C02&style=flat-square)](#)
+[![Framework](https://img.shields.io/badge/React-Framework-blue?style=flat-square)](https://reactjs.org)
+[![Deploy](https://img.shields.io/badge/Vercel-Deploy-FC4C02?style=flat-square)](https://reactjs.org)
+[![Status](https://img.shields.io/badge/Status-Em%20desenvolvimento-FC4C02?style=flat-square)](https://vercel.com/)
 
-In the project directory, you can run:
+<h4 align="center">
+  Stats é uma aplicação para a visualização de dados de usuários do Strava.
+</h4>
 
-### `yarn start`
+![Stats preview](.github/app-preview.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 🧪 Tecnologias
+<div align="center">
+  <br />
+  <img src=".github/tech-logos.png" alt="Technologies used">
+</div>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Este projeto foi desenvolvido usando as seguintes tecnologias:
 
-### `yarn test`
+- [React](https://reactjs.org)
+- [Chakra UI](https://chakra-ui.com/)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🚀 Deploy da aplicação com Vercel
 
-### `yarn build`
+> https://stats-kx.vercel.app/
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 👨🏽‍💻 Inicialização local
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Requerimentos
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Você precisa instalar tanto o [Node.js](https://nodejs.org/en/download/) e [Yarn](https://yarnpkg.com/) para executar esta aplicação.
 
-### `yarn eject`
+**No terminal, clone o projeto e acesse a pasta do aplicação**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+$ git clone https://github.com/Klayverx/stats.git && cd stats
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Siga os passos abaixo:**
+```bash
+# Instalar as dependências
+$ yarn
+# Mudar o `redirect_uri` no arquivo Home.js para inicir localmente 
+# Iniciar o front-end
+$ yarn start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+A aplicação poderá ser acessada localmente em `http://localhost:3000`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 🚴🏽‍♂️ API de referência - Strava
 
-## Learn More
+[Strava API](https://developers.strava.com/docs/reference/)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🔖 Layout
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Você pode ver o layout do projeto no Figma no link abaixo:
 
-### Code Splitting
+- [Layout Desktop](https://www.figma.com/file/UwFEntsHpHYJlHNQAQr4gA/Podcastr?node-id=160%3A2761) 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Lembrando que você precisa ter uma conta no [Figma](http://figma.com/) para poder acessar.
 
-### Analyzing the Bundle Size
+## 📝 Licença
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[MIT](https://choosealicense.com/licenses/mit/)
