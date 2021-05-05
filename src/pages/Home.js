@@ -30,9 +30,14 @@ function Home() {
 	const access_token = localStorage.getItem('access_token');
 
 	const [dataAthlete, setDataAthlete] = useState({});
-	const [dataClubs, setDataClubs] = useState({});
-	const [statsAthlete, setStatsAthlete] = useState({});
-	const [athleteActivities, setAthleteActivities] = useState({});
+	const [dataClubs, setDataClubs] = useState([{}]);
+	// const [statsAthlete, setStatsAthlete] = useState({});
+	const [athleteActivities, setAthleteActivities] = useState([{}]);
+	const [distanceTotal, setDistanceTotal] = useState(0);
+	const [elevationGain, setElevationGain] = useState(0);
+	const [biggestRide, setBiggestRide] = useState(0);
+	const [biggestElevation, setBiggestElevation] = useState(0);
+	const [rideCount, setRideCount] = useState(0);
 
 	useEffect(() => {
 		api.get('athlete', {
@@ -42,13 +47,25 @@ function Home() {
 		}).then(resp => {
 			setDataAthlete(resp.data);
 
-			api.get(`athletes/${dataAthlete.id}/stats`, {
+			api.get(`athletes/${resp.data.id}/stats`, {
 				headers: {
 					Authorization: `Bearer ${access_token}`,
 				},
 			}).then(resp => {
-				setStatsAthlete(resp.data);
-				console.log(resp.data);
+				// setStatsAthlete(resp.data);
+				setDistanceTotal(
+					Math.floor(resp.data.all_ride_totals.distance / 1000)
+				);
+				setElevationGain(
+					Math.floor(resp.data.all_ride_totals.elevation_gain / 100)
+				);
+				setBiggestRide(
+					Math.floor(resp.data.biggest_ride_distance / 1000)
+				);
+				setBiggestElevation(
+					Math.floor(resp.data.biggest_climb_elevation_gain)
+				);
+				setRideCount(Math.floor(resp.data.all_ride_totals.count));
 			});
 		});
 
@@ -70,8 +87,6 @@ function Home() {
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-
-	// console.log(statsAthlete.all_ride_totals.distance);
 
 	return (
 		<>
@@ -188,10 +203,7 @@ function Home() {
 									<Spacer />
 									<Center alignItems="baseline">
 										<Text fontSize="5xl" fontWeight="bold">
-											{Math.floor(
-												statsAthlete.all_ride_totals
-													.distance / 1000
-											)}
+											{distanceTotal}
 										</Text>
 										<Text fontSize="2xl" fontWeight="bold">
 											{' '}
@@ -207,10 +219,7 @@ function Home() {
 									<Spacer />
 									<Center alignItems="baseline">
 										<Text fontSize="5xl" fontWeight="bold">
-											{Math.floor(
-												statsAthlete.all_ride_totals
-													.elevation_gain / 100
-											)}
+											{elevationGain}
 										</Text>
 										<Text fontSize="2xl" fontWeight="bold">
 											{' '}
@@ -235,10 +244,7 @@ function Home() {
 									<Spacer />
 									<Center alignItems="baseline">
 										<Text fontSize="5xl" fontWeight="bold">
-											{Math.floor(
-												statsAthlete.biggest_ride_distance /
-													1000
-											)}
+											{biggestRide}
 										</Text>
 										<Text fontSize="2xl" fontWeight="bold">
 											km
@@ -253,9 +259,7 @@ function Home() {
 									<Spacer />
 									<Center alignItems="baseline">
 										<Text fontSize="5xl" fontWeight="bold">
-											{Math.floor(
-												statsAthlete.biggest_climb_elevation_gain
-											)}
+											{biggestElevation}
 										</Text>
 										<Text fontSize="2xl" fontWeight="bold">
 											{' '}
@@ -283,7 +287,7 @@ function Home() {
 									</Text>
 									<Center>
 										<Text fontSize="5xl" fontWeight="bold">
-											{statsAthlete.all_ride_totals.count}
+											{rideCount}
 										</Text>
 									</Center>
 								</Container>
