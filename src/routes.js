@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import Login from './pages/Login';
-import Home from './pages/Home';
+import Layout from './pages/Layout';
 import Auth from './pages/Auth';
 import NotFound from './pages/NotFound';
 
@@ -11,7 +11,7 @@ function Routes() {
 		<BrowserRouter>
 			<Switch>
 				<Route exact path="/" component={Login} />
-				<Route path="/home" component={Home} />
+				<Route path="/home" component={Layout} />
 				<Route path="/auth" component={Auth} />
 				<Route component={NotFound} />
 			</Switch>

@@ -17,7 +17,7 @@ import Sun from '../assets/icons/sun.svg';
 export default function Login() {
 	// https://stats-kx.vercel.app/
 	// http://localhost:3000/auth
-	const redirect_uri = 'https://stats-kx.vercel.app/auth';
+	const redirect_uri = 'http://localhost:3000/auth';
 	const scope = 'read,profile:read_all,activity:read_all,activity:write';
 
 	return (
