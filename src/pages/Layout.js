@@ -20,20 +20,18 @@ import StatsPage from '../components/Stats';
 import {api} from '../services/api';
 
 function Layout() {
-	const access_token = localStorage.getItem('access_token');
-
 	const [dataAthlete, setDataAthlete] = useState({});
 	const [athleteStats, setAthleteStats] = useState({});
 	const [lastActivity, setLastActivity] = useState({});
 
-	const [pages, setPages] = useState({
-		stats: true,
-		profile: false,
-		achievements: false,
-		gears: false,
-	});
+	// const [pages, setPages] = useState({
+	// 	stats: true,
+	// 	profile: false,
+	// 	achievements: false,
+	// 	gears: false,
+	// });
 
-	function handlerPages(props) {}
+	// function handlerPages(props) {}
 
 	useEffect(() => {
 		async function getDataAthlete() {
@@ -170,15 +168,15 @@ function Layout() {
 					</Text>
 				</Flex>
 
-				{pages.stats === true ? (
-					<StatsPage
-						dataAthlete={dataAthlete}
-						athleteStats={athleteStats}
-						lastActivity={lastActivity}
-					/>
-				) : (
+				{/* {pages.stats === true ? ( */}
+				<StatsPage
+					dataAthlete={dataAthlete}
+					athleteStats={athleteStats}
+					lastActivity={lastActivity}
+				/>
+				{/* ) : (
 					''
-				)}
+				)} */}
 			</Flex>
 		</Flex>
 	);
