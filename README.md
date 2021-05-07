@@ -58,6 +58,8 @@ A aplicação poderá ser acessada localmente em `http://localhost:3000`
 
 [Strava API](https://developers.strava.com/docs/reference/)
 
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Strava%20API&uri=https%3A%2F%2Fraw.githubusercontent.com%2FKlayverx%2Fstats%2Fmaster%2Fstrava-api.json)
+
 ## 🔖 Layout
 
 Você pode ver o layout do projeto no Figma no link abaixo:
