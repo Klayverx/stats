@@ -2,7 +2,7 @@ import {extendTheme} from '@chakra-ui/react';
 
 export const statsTheme = extendTheme({
 	fonts: {
-		body: 'Roboto, -apple-system',
+		body: 'Inter, sans-serif',
 	},
 	fontWeight: {
 		normal: 400,

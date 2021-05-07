@@ -10,6 +10,7 @@ import {Flex} from '@chakra-ui/layout';
 
 import Stats from '../assets/stats-white.png';
 import MapPin from '../assets/icons/map-pin.svg';
+import Edit from '../assets/icons/edit.svg';
 import BarChart from '../assets/icons/bar-chart.svg';
 import Bicycle from '../assets/icons/bicycle.svg';
 import Trophy from '../assets/icons/trophy.svg';
@@ -22,10 +23,17 @@ function Layout() {
 	const access_token = localStorage.getItem('access_token');
 
 	const [dataAthlete, setDataAthlete] = useState({});
-
 	const [athleteStats, setAthleteStats] = useState({});
-
 	const [lastActivity, setLastActivity] = useState({});
+
+	const [pages, setPages] = useState({
+		stats: true,
+		profile: false,
+		achievements: false,
+		gears: false,
+	});
+
+	function handlerPages(props) {}
 
 	useEffect(() => {
 		async function getDataAthlete() {
@@ -63,110 +71,131 @@ function Layout() {
 	}, []);
 
 	return (
-		<>
-			<Flex h="100vh">
-				<VStack h="100%" w="16rem" bg="primary" spacing={4}>
-					<Image w="9rem" mt={5} src={Stats} alt="Stats"></Image>
-					<Spacer />
-					<Flex color="white" direction="column" align="center">
-						<Image
-							width="6rem"
-							src={dataAthlete.profile}
-							alt="Stats"
-							border="3px solid"
-							borderRadius="50%"
-							borderColor="white"
-							mb={3}
-						></Image>
-						<Text
-							weight="bold"
-							fontSize="lg"
-							fontWeight="bold"
-							isTruncated
-						>
-							{dataAthlete.firstname} {dataAthlete.lastname}
-						</Text>
-						<Flex color="white">
+		<Flex h="100vh">
+			<VStack h="100%" w="16rem" bg="primary" spacing={4}>
+				<Image w="9rem" mt={5} src={Stats} alt="Stats"></Image>
+				<Spacer />
+				<Flex color="white" direction="column" align="center">
+					<Image
+						width="6rem"
+						src={dataAthlete.profile}
+						alt="Stats"
+						border="3px solid"
+						borderRadius="50%"
+						borderColor="white"
+						mb={3}
+					></Image>
+					<Text
+						weight="bold"
+						fontSize="lg"
+						fontWeight="bold"
+						isTruncated
+					>
+						{dataAthlete.firstname} {dataAthlete.lastname}{' '}
+						<Link to="/">
 							<Image
-								src={MapPin}
-								alt="Map Pin"
-								width="1rem"
+								display="inline"
+								verticalAlign="initial"
+								src={Edit}
+								alt="Edit"
+								width="1.1rem"
 								mr={1}
+								_hover={{
+									transform: 'scale(1.05)',
+								}}
 							/>
-							{dataAthlete.city}, {dataAthlete.state}
-						</Flex>
+						</Link>
+					</Text>
+					<Flex color="white">
+						<Image src={MapPin} alt="Map Pin" width="1rem" mr={1} />
+						{dataAthlete.city}, {dataAthlete.state}
 					</Flex>
+				</Flex>
+
+				<Spacer />
+
+				<Flex direction="column" h="60vh" pb={4} align="center">
+					<Link
+						textAlign="-webkit-center"
+						_hover={{
+							transform: 'scale(1.03)',
+						}}
+					>
+						<Image src={BarChart} alt="BarChart" width="4.2rem" />
+						<Text color="white" fontWeight="bold">
+							Estatísticas
+						</Text>
+					</Link>
+					<Spacer />
+					<Link
+						textAlign="-webkit-center"
+						_hover={{
+							transform: 'scale(1.03)',
+						}}
+					>
+						<Image src={Trophy} alt="Trophy" width="4.2rem" />
+						<Text color="white" fontWeight="bold">
+							Conquistas
+						</Text>
+					</Link>
 
 					<Spacer />
 
-					<Flex direction="column" h="60vh" pb={4} align="center">
-						<Link>
-							<Image
-								src={BarChart}
-								alt="BarChart"
-								width="4.2rem"
-							/>
-							<Text color="white" fontWeight="bold">
-								Estatísticas
-							</Text>
-						</Link>
-						<Spacer />
-						<Link>
-							<Image src={Trophy} alt="Trophy" width="4.2rem" />
-							<Text color="white" fontWeight="bold">
-								Conquistas
-							</Text>
-						</Link>
-
-						<Spacer />
-
-						<Link>
-							<Image
-								src={Bicycle}
-								alt="Bicycle"
-								width="5rem"
-								align="center"
-							/>
-							<Text color="white" fontWeight="bold">
-								Equipamentos
-							</Text>
-						</Link>
-
-						<Spacer />
-
-						<Text color="white" fontSize={12} pb={2}>
-							Feito por{' '}
-							<a
-								href="https://www.instagram.com/klayverxd/?hl=pt-br"
-								rel="noreferrer"
-							>
-								Klayver KOM 👑
-							</a>
+					<Link
+						textAlign="-webkit-center"
+						_hover={{
+							transform: 'scale(1.03)',
+						}}
+					>
+						<Image
+							src={Bicycle}
+							alt="Bicycle"
+							width="5rem"
+							align="center"
+						/>
+						<Text color="white" fontWeight="bold">
+							Equipamentos
 						</Text>
-					</Flex>
-				</VStack>
+					</Link>
 
-				<Flex w="100%" direction="column">
-					<Flex bg="primary" h="3rem" w="100%" p={8} align="center">
-						<Text color="white" fontSize="2xl" fontWeight="bold">
-							Estatísticas 📊
-						</Text>
+					<Spacer />
 
-						<Spacer />
+					<Text color="white" fontSize={12} pb={2}>
+						Feito por{' '}
+						<Link
+							href="https://www.instagram.com/klayverxd/?hl=pt-br"
+							target="_blank"
+						>
+							Klayver KOM 👑
+						</Link>
+					</Text>
+				</Flex>
+			</VStack>
 
-						<Text color="white" fontSize="xl" fontWeight="bold">
-							{format(new Date(), 'dd / MM / Y')} 📅
-						</Text>
-					</Flex>
+			<Flex w="100%" direction="column">
+				<Flex bg="primary" h="3rem" w="100%" p={8} align="center">
+					<Text color="white" fontSize="2xl" fontWeight="bold">
+						Estatísticas 📊
+					</Text>
 
+					<Spacer />
+
+					<Text color="white" fontSize="xl" fontWeight="bold">
+						{format(new Date(), 'dd / MM / Y')} 📅
+					</Text>
+				</Flex>
+
+				{pages.stats === true ? (
 					<StatsPage
 						dataAthlete={dataAthlete}
 						athleteStats={athleteStats}
 						lastActivity={lastActivity}
 					/>
-				</Flex>
+				) : (
+					''
+				)}
 			</Flex>
-		</>
+		</Flex>
 	);
 }
 
