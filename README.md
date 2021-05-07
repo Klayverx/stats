@@ -37,7 +37,7 @@ Este projeto foi desenvolvido usando as seguintes tecnologias:
 
 - Você precisa instalar tanto o [Node.js](https://nodejs.org/en/download/) e [Yarn](https://yarnpkg.com/) para executar esta aplicação.
 
-**No terminal, clone o projeto e acesse a pasta do aplicação**
+**No terminal, clone o projeto e acesse a pasta da aplicação**
 
 ```bash
 $ git clone https://github.com/Klayverx/stats.git && cd stats
@@ -64,7 +64,7 @@ A aplicação poderá ser acessada localmente em `http://localhost:3000`
 
 Você pode ver o layout do projeto no Figma no link abaixo:
 
-- [Layout Desktop](https://www.figma.com/file/UwFEntsHpHYJlHNQAQr4gA/Podcastr?node-id=160%3A2761) 
+- [Layout Desktop](https://www.figma.com/file/6N8Nvz5j3lWwAnEXITIZw6/STATS?node-id=0%3A1) 
 
 Lembrando que você precisa ter uma conta no [Figma](http://figma.com/) para poder acessar.
 
