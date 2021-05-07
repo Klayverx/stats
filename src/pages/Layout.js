@@ -38,30 +38,15 @@ function Layout() {
 	useEffect(() => {
 		async function getDataAthlete() {
 			// dados do atleta
-			const request = await api.get('athlete', {
-				headers: {
-					Authorization: `Bearer ${access_token}`,
-				},
-			});
+			const request = await api.get('athlete');
 			setDataAthlete(request.data);
 
 			// última atividade
-			const request2 = await api.get('athlete/activities', {
-				headers: {
-					Authorization: `Bearer ${access_token}`,
-				},
-			});
+			const request2 = await api.get('athlete/activities');
 			setLastActivity(request2.data[0]);
 
 			// estatísticas do atleta
-			const request3 = await api.get(
-				`athletes/${request.data.id}/stats`,
-				{
-					headers: {
-						Authorization: `Bearer ${access_token}`,
-					},
-				}
-			);
+			const request3 = await api.get(`athletes/${request.data.id}/stats`);
 			setAthleteStats(request3.data);
 		}
 
