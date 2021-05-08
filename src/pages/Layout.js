@@ -13,7 +13,7 @@ import MapPin from '../assets/icons/map-pin.svg';
 import Edit from '../assets/icons/edit.svg';
 import BarChart from '../assets/icons/bar-chart.svg';
 import Bicycle from '../assets/icons/bicycle.svg';
-import Trophy from '../assets/icons/trophy.svg';
+import Road from '../assets/icons/road.svg';
 
 import StatsPage from '../components/Stats';
 
@@ -116,9 +116,9 @@ function Layout() {
 							transform: 'scale(1.03)',
 						}}
 					>
-						<Image src={Trophy} alt="Trophy" width="4.2rem" />
+						<Image src={Road} alt="Road" width="4.2rem" />
 						<Text color="white" fontWeight="bold">
-							Conquistas
+							Criar atividade
 						</Text>
 					</Link>
 
