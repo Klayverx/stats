@@ -1,24 +1,24 @@
-import React from 'react';
+import React from 'react'
 
-import {Button} from '@chakra-ui/button';
-import {Image} from '@chakra-ui/image';
-import {Box, Flex, Heading, Spacer, Text} from '@chakra-ui/layout';
-import {Stack} from '@chakra-ui/layout';
+import { Button } from '@chakra-ui/button'
+import { Image } from '@chakra-ui/image'
+import { Box, Flex, Heading, Spacer, Text } from '@chakra-ui/layout'
+import { Stack } from '@chakra-ui/layout'
 
-import ImgLogin from '../assets/profile.png';
-import Stats from '../assets/stats-white.png';
+import ImgLogin from '../assets/profile.png'
+import Stats from '../assets/stats-white.png'
 
-import Navigation from '../assets/icons/navigation.svg';
-import Map from '../assets/icons/map.svg';
-import MapPin from '../assets/icons/map-pin.svg';
-import Activity from '../assets/icons/activity.svg';
-import Sun from '../assets/icons/sun.svg';
+import Navigation from '../assets/icons/navigation.svg'
+import Map from '../assets/icons/map.svg'
+import MapPin from '../assets/icons/map-pin.svg'
+import Activity from '../assets/icons/activity.svg'
+import Sun from '../assets/icons/sun.svg'
 
 export default function Login() {
 	// https://stats-kx.vercel.app/auth
 	// http://localhost:3000/auth
-	const redirect_uri = 'https://stats-kx.vercel.app/auth';
-	const scope = 'read,profile:read_all,activity:read_all,activity:write';
+	const redirect_uri = 'https://stats-kx.vercel.app/auth'
+	const scope = 'read,profile:read_all,activity:read_all,activity:write'
 
 	return (
 		<>
@@ -44,9 +44,9 @@ export default function Login() {
 				</Heading>
 				<Spacer />
 				<Text fontSize="lg" w="45%">
-					Somos um aplicativo voltado para praticantes de ciclismo, e
-					vamos te ajudar a visualizar alguns dos seus dados presentes
-					na sua conta do Strava.
+					Somos um aplicativo voltado para praticantes de ciclismo, e vamos te
+					ajudar a visualizar alguns dos seus dados presentes na sua conta do
+					Strava.
 				</Text>
 				<Spacer />
 				<Stack spacing={4} direction="row" ml="-10">
@@ -103,5 +103,5 @@ export default function Login() {
 				</Button>
 			</Box>
 		</>
-	);
+	)
 }

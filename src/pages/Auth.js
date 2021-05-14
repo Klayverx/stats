@@ -1,18 +1,18 @@
-import React, {useEffect} from 'react';
-import {useHistory} from 'react-router';
+import React, { useEffect } from 'react'
+import { useHistory } from 'react-router'
 
-import {apiToken} from '../services/api';
+import { apiToken } from '../services/api'
 
 export default function Auth() {
-	const history = useHistory();
+	const history = useHistory()
 	// const [error, setError] = useState(false);
 
-	const client_id = 65376;
-	const client_secret = '9141aecf4bc807456509b80235c856034984ce38';
-	const grant_type = 'authorization_code';
+	const client_id = 65376
+	const client_secret = '9141aecf4bc807456509b80235c856034984ce38'
+	const grant_type = 'authorization_code'
 
-	const url = new URL(window.location);
-	const code = url.searchParams.get('code');
+	const url = new URL(window.location)
+	const code = url.searchParams.get('code')
 	// const scope = url.searchParams.get('scope').split(',');
 
 	// const [matchedScope, setMatchedScope] = useState(false);
@@ -40,20 +40,13 @@ export default function Auth() {
 				`token?client_id=${client_id}&client_secret=${client_secret}&code=${code}&grant_type=${grant_type}`
 			)
 			.then(resp => {
-				localStorage.setItem('access_token', resp.data.access_token);
-				localStorage.setItem('refresh_token', resp.data.refresh_token);
+				localStorage.setItem('access_token', resp.data.access_token)
+				localStorage.setItem('refresh_token', resp.data.refresh_token)
 			})
-			.then(() => history.push('/home'));
-		// }
-
-		// window.history.pushState(
-		// 	'',
-		// 	document.title,
-		// 	window.location.pathname + window.location.search
-		// );
+			.then(() => history.push('/home'))
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [])
 
 	return (
 		<>
@@ -66,5 +59,5 @@ export default function Auth() {
 				<h1>Loading...</h1>
 			)} */}
 		</>
-	);
+	)
 }

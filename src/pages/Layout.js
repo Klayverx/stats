@@ -1,57 +1,61 @@
-import React, {useEffect, useState} from 'react';
-import {format} from 'date-fns';
+import React, { useEffect, useState } from 'react'
+import { format } from 'date-fns'
 
-import {Image} from '@chakra-ui/image';
-import {Spacer} from '@chakra-ui/layout';
-import {VStack} from '@chakra-ui/layout';
-import {Link} from '@chakra-ui/layout';
-import {Text} from '@chakra-ui/layout';
-import {Flex} from '@chakra-ui/layout';
+import { Image } from '@chakra-ui/image'
+import { Spacer } from '@chakra-ui/layout'
+import { VStack } from '@chakra-ui/layout'
+import { Link } from '@chakra-ui/layout'
+import { Text } from '@chakra-ui/layout'
+import { Flex } from '@chakra-ui/layout'
 
-import Stats from '../assets/stats-white.png';
-import MapPin from '../assets/icons/map-pin.svg';
-import Edit from '../assets/icons/edit.svg';
-import BarChart from '../assets/icons/bar-chart.svg';
-import Bicycle from '../assets/icons/bicycle.svg';
-import Road from '../assets/icons/road.svg';
+import Stats from '../assets/stats-white.png'
+import MapPin from '../assets/icons/map-pin.svg'
+import Edit from '../assets/icons/edit.svg'
+import BarChart from '../assets/icons/bar-chart.svg'
+import Bicycle from '../assets/icons/bicycle.svg'
+import Road from '../assets/icons/road.svg'
 
-import StatsPage from '../components/Stats';
+import StatsPage from '../components/Stats'
 
-import {api} from '../services/api';
+import { api } from '../services/api'
 
 function Layout() {
-	const [dataAthlete, setDataAthlete] = useState({});
-	const [athleteStats, setAthleteStats] = useState({});
-	const [lastActivity, setLastActivity] = useState({});
-
-	// const [pages, setPages] = useState({
-	// 	stats: true,
-	// 	profile: false,
-	// 	achievements: false,
-	// 	gears: false,
-	// });
-
-	// function handlerPages(props) {}
+	const [dataAthlete, setDataAthlete] = useState({})
+	const [athleteStats, setAthleteStats] = useState({})
+	const [lastActivity, setLastActivity] = useState({})
+	const access_token = localStorage.getItem('access_token')
 
 	useEffect(() => {
 		async function getDataAthlete() {
 			// dados do atleta
-			const request = await api.get('athlete');
-			setDataAthlete(request.data);
+			const request = await api.get('athlete', {
+				headers: {
+					Authorization: `Bearer ${access_token}`,
+				},
+			})
+			setDataAthlete(request.data)
 
 			// última atividade
-			const request2 = await api.get('athlete/activities');
-			setLastActivity(request2.data[0]);
+			const request2 = await api.get('athlete/activities', {
+				headers: {
+					Authorization: `Bearer ${access_token}`,
+				},
+			})
+			setLastActivity(request2.data[0])
 
 			// estatísticas do atleta
-			const request3 = await api.get(`athletes/${request.data.id}/stats`);
-			setAthleteStats(request3.data);
+			const request3 = await api.get(`athletes/${request.data.id}/stats`, {
+				headers: {
+					Authorization: `Bearer ${access_token}`,
+				},
+			})
+			setAthleteStats(request3.data)
 		}
 
-		getDataAthlete();
+		getDataAthlete()
 
 		// eslint-disable-next-line
-	}, []);
+	}, [])
 
 	return (
 		<Flex h="100vh">
@@ -68,12 +72,7 @@ function Layout() {
 						borderColor="white"
 						mb={3}
 					></Image>
-					<Text
-						weight="bold"
-						fontSize="lg"
-						fontWeight="bold"
-						isTruncated
-					>
+					<Text weight="bold" fontSize="lg" fontWeight="bold" isTruncated>
 						{dataAthlete.firstname} {dataAthlete.lastname}{' '}
 						<Link to="/">
 							<Image
@@ -130,12 +129,7 @@ function Layout() {
 							transform: 'scale(1.03)',
 						}}
 					>
-						<Image
-							src={Bicycle}
-							alt="Bicycle"
-							width="5rem"
-							align="center"
-						/>
+						<Image src={Bicycle} alt="Bicycle" width="5rem" align="center" />
 						<Text color="white" fontWeight="bold">
 							Equipamentos
 						</Text>
@@ -179,7 +173,7 @@ function Layout() {
 				)} */}
 			</Flex>
 		</Flex>
-	);
+	)
 }
 
-export default Layout;
+export default Layout
