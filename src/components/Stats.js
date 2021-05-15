@@ -49,7 +49,7 @@ export default function Stats() {
 							<Text fontSize="5xl" fontWeight="bold">
 								{Math.floor(
 									location.state?.athleteStats.all_ride_totals?.distance / 1000
-								) || 0}
+								).toLocaleString('pt-BR') || 0}
 							</Text>
 							<Text fontSize="2xl" fontWeight="bold">
 								{' '}
@@ -68,7 +68,7 @@ export default function Stats() {
 								{Math.floor(
 									location.state?.athleteStats.all_ride_totals?.elevation_gain /
 										10
-								) || 0}
+								).toLocaleString('pt-BR') || 0}
 							</Text>
 							<Text fontSize="2xl" fontWeight="bold">
 								{' '}
@@ -113,7 +113,7 @@ export default function Stats() {
 							<Text fontSize="5xl" fontWeight="bold">
 								{Math.floor(
 									location.state?.athleteStats.biggest_climb_elevation_gain
-								) || 0}
+								).toLocaleString('pt-BR') || 0}
 							</Text>
 							<Text fontSize="2xl" fontWeight="bold">
 								{' '}
@@ -142,7 +142,9 @@ export default function Stats() {
 						</Text>
 						<Center>
 							<Text fontSize="5xl" fontWeight="bold">
-								{location.state?.athleteStats.all_ride_totals?.count || 0}
+								{location.state?.athleteStats.all_ride_totals?.count.toLocaleString(
+									'pt-BR'
+								) || 0}
 							</Text>
 						</Center>
 					</Container>
@@ -168,7 +170,9 @@ export default function Stats() {
 
 						<Center>
 							<Text fontSize="5xl" fontWeight="bold">
-								{location.state?.dataAthlete.clubs?.length || 0}
+								{location.state?.dataAthlete.clubs?.length.toLocaleString(
+									'pt-BR'
+								) || 0}
 							</Text>
 						</Center>
 					</Container>
@@ -189,7 +193,7 @@ export default function Stats() {
 						Última atividade 🚲
 					</Text>
 					<Text fontSize="lg" lineHeight={8}>
-						Título: {location.state?.lastActivity.name}
+						Título: {location.state?.lastActivity.name || 'Título da atividade'}
 					</Text>
 					<Text fontSize="lg" lineHeight={8}>
 						Distância:{' '}
