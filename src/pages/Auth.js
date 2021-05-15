@@ -43,7 +43,7 @@ export default function Auth() {
 				localStorage.setItem('access_token', resp.data.access_token)
 				localStorage.setItem('refresh_token', resp.data.refresh_token)
 			})
-			.then(() => history.push('/home'))
+			.then(() => history.push('/stats'))
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
