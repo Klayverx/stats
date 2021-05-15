@@ -14,12 +14,12 @@ function Routes() {
 		<BrowserRouter>
 			<Switch>
 				<Route exact path="/" component={Login} />
+				<Route path="/auth" component={Auth} />
 				<Layout>
 					<Route path="/stats" component={Stats} />
 					<Route path="/create" component={Create} />
 					<Route path="/equipaments" component={Equipament} />
 				</Layout>
-				<Route path="/auth" component={Auth} />
 				<Route component={NotFound} />
 			</Switch>
 		</BrowserRouter>
