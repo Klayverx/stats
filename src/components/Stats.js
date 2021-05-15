@@ -1,6 +1,7 @@
-import React from 'react';
+import React from 'react'
+import { useLocation } from 'react-router'
 
-import {Image} from '@chakra-ui/image';
+import { Image } from '@chakra-ui/image'
 import {
 	Center,
 	Container,
@@ -10,12 +11,14 @@ import {
 	GridItem,
 	Spacer,
 	Text,
-} from '@chakra-ui/layout';
+} from '@chakra-ui/layout'
 
-import Cyclist from '../assets/icons/cyclist.svg';
-import Cyclists from '../assets/icons/cyclists.svg';
+import Cyclist from '../assets/icons/cyclist.svg'
+import Cyclists from '../assets/icons/cyclists.svg'
 
-export default function Stats(props) {
+export default function Stats() {
+	const location = useLocation()
+
 	return (
 		<Grid
 			h="100%"
@@ -45,8 +48,7 @@ export default function Stats(props) {
 						<Center alignItems="baseline">
 							<Text fontSize="5xl" fontWeight="bold">
 								{Math.floor(
-									props.athleteStats.all_ride_totals
-										?.distance / 1000
+									location.state?.athleteStats.all_ride_totals?.distance / 1000
 								) || 0}
 							</Text>
 							<Text fontSize="2xl" fontWeight="bold">
@@ -64,8 +66,8 @@ export default function Stats(props) {
 						<Center alignItems="baseline">
 							<Text fontSize="5xl" fontWeight="bold">
 								{Math.floor(
-									props.athleteStats.all_ride_totals
-										?.elevation_gain / 10
+									location.state?.athleteStats.all_ride_totals?.elevation_gain /
+										10
 								) || 0}
 							</Text>
 							<Text fontSize="2xl" fontWeight="bold">
@@ -93,8 +95,7 @@ export default function Stats(props) {
 						<Center alignItems="baseline">
 							<Text fontSize="5xl" fontWeight="bold">
 								{Math.floor(
-									props.athleteStats.biggest_ride_distance /
-										1000
+									location.state?.athleteStats.biggest_ride_distance / 1000
 								) || 0}
 							</Text>
 							<Text fontSize="2xl" fontWeight="bold">
@@ -111,8 +112,7 @@ export default function Stats(props) {
 						<Center alignItems="baseline">
 							<Text fontSize="5xl" fontWeight="bold">
 								{Math.floor(
-									props.athleteStats
-										.biggest_climb_elevation_gain
+									location.state?.athleteStats.biggest_climb_elevation_gain
 								) || 0}
 							</Text>
 							<Text fontSize="2xl" fontWeight="bold">
@@ -142,7 +142,7 @@ export default function Stats(props) {
 						</Text>
 						<Center>
 							<Text fontSize="5xl" fontWeight="bold">
-								{props.athleteStats.all_ride_totals?.count || 0}
+								{location.state?.athleteStats.all_ride_totals?.count || 0}
 							</Text>
 						</Center>
 					</Container>
@@ -168,7 +168,7 @@ export default function Stats(props) {
 
 						<Center>
 							<Text fontSize="5xl" fontWeight="bold">
-								{props.dataAthlete.clubs?.length || 0}
+								{location.state?.dataAthlete.clubs?.length || 0}
 							</Text>
 						</Center>
 					</Container>
@@ -189,34 +189,31 @@ export default function Stats(props) {
 						Última atividade 🚲
 					</Text>
 					<Text fontSize="lg" lineHeight={8}>
-						Título: {props.lastActivity.name}
+						Título: {location.state?.lastActivity.name}
 					</Text>
 					<Text fontSize="lg" lineHeight={8}>
 						Distância:{' '}
-						{Math.floor(props.lastActivity.distance / 1000) || 0} km
+						{Math.floor(location.state?.lastActivity.distance / 1000) || 0} km
 					</Text>
 					<Text fontSize="lg" lineHeight={8}>
 						Elevação:{' '}
-						{Math.floor(props.lastActivity.total_elevation_gain) ||
-							0}{' '}
+						{Math.floor(location.state?.lastActivity.total_elevation_gain) || 0}{' '}
 						m
 					</Text>
 					<Text fontSize="lg" lineHeight={8}>
-						Kudos: {props.lastActivity.kudos_count || 0}
+						Kudos: {location.state?.lastActivity.kudos_count || 0}
 					</Text>
 					<Text fontSize="lg" lineHeight={8}>
 						Vel. média:{' '}
-						{Math.floor(props.lastActivity.average_speed * 3.6) ||
-							0}{' '}
+						{Math.floor(location.state?.lastActivity.average_speed * 3.6) || 0}{' '}
 						km/h
 					</Text>
 					<Text fontSize="lg" lineHeight={8}>
 						Vel. máxima:{' '}
-						{Math.floor(props.lastActivity.max_speed * 3.6) || 0}{' '}
-						km/h
+						{Math.floor(location.state?.lastActivity.max_speed * 3.6) || 0} km/h
 					</Text>
 				</Flex>
 			</GridItem>
 		</Grid>
-	);
+	)
 }
