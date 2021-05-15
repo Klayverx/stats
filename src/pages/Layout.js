@@ -1,25 +1,21 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { format } from 'date-fns'
 
 import { Image } from '@chakra-ui/image'
-import { Spacer } from '@chakra-ui/layout'
-import { VStack } from '@chakra-ui/layout'
-import { Link } from '@chakra-ui/layout'
-import { Text } from '@chakra-ui/layout'
-import { Flex } from '@chakra-ui/layout'
+import { Spacer, VStack, Link, Text, Flex } from '@chakra-ui/layout'
 
 import Stats from '../assets/stats-white.png'
 import MapPin from '../assets/icons/map-pin.svg'
-import Edit from '../assets/icons/edit.svg'
 import BarChart from '../assets/icons/bar-chart.svg'
 import Bicycle from '../assets/icons/bicycle.svg'
 import Road from '../assets/icons/road.svg'
 
-import StatsPage from '../components/Stats'
-
 import { api } from '../services/api'
 
-function Layout() {
+function Layout({ children }) {
+	const history = useHistory()
+
 	const [dataAthlete, setDataAthlete] = useState({})
 	const [athleteStats, setAthleteStats] = useState({})
 	const [lastActivity, setLastActivity] = useState({})
@@ -73,20 +69,7 @@ function Layout() {
 						mb={3}
 					></Image>
 					<Text weight="bold" fontSize="lg" fontWeight="bold" isTruncated>
-						{dataAthlete.firstname} {dataAthlete.lastname}{' '}
-						<Link to="/">
-							<Image
-								display="inline"
-								verticalAlign="initial"
-								src={Edit}
-								alt="Edit"
-								width="1.1rem"
-								mr={1}
-								_hover={{
-									transform: 'scale(1.05)',
-								}}
-							/>
-						</Link>
+						{dataAthlete.firstname} {dataAthlete.lastname}
 					</Text>
 					<Flex color="white">
 						<Image src={MapPin} alt="Map Pin" width="1rem" mr={1} />
@@ -102,6 +85,13 @@ function Layout() {
 						_hover={{
 							transform: 'scale(1.03)',
 						}}
+						onClick={() =>
+							history.push('/stats', {
+								athleteStats,
+								dataAthlete,
+								lastActivity,
+							})
+						}
 					>
 						<Image src={BarChart} alt="BarChart" width="4.2rem" />
 						<Text color="white" fontWeight="bold">
@@ -114,6 +104,7 @@ function Layout() {
 						_hover={{
 							transform: 'scale(1.03)',
 						}}
+						onClick={() => history.push('/create')}
 					>
 						<Image src={Road} alt="Road" width="4.2rem" />
 						<Text color="white" fontWeight="bold">
@@ -128,6 +119,7 @@ function Layout() {
 						_hover={{
 							transform: 'scale(1.03)',
 						}}
+						onClick={() => history.push('/equipaments')}
 					>
 						<Image src={Bicycle} alt="Bicycle" width="5rem" align="center" />
 						<Text color="white" fontWeight="bold">
@@ -161,16 +153,7 @@ function Layout() {
 						{format(new Date(), 'dd / MM / Y')} 📅
 					</Text>
 				</Flex>
-
-				{/* {pages.stats === true ? ( */}
-				<StatsPage
-					dataAthlete={dataAthlete}
-					athleteStats={athleteStats}
-					lastActivity={lastActivity}
-				/>
-				{/* ) : (
-					''
-				)} */}
+				{children}
 			</Flex>
 		</Flex>
 	)
