@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router'
+
+import { api } from '../services/api'
 
 import DatePicker from 'react-datepicker'
 
@@ -17,6 +20,12 @@ import { NumberInputField } from '@chakra-ui/number-input'
 import { NumberInput } from '@chakra-ui/number-input'
 import { InputRightAddon } from '@chakra-ui/input'
 import { Textarea } from '@chakra-ui/textarea'
+import { Button } from '@chakra-ui/button'
+import { Select } from '@chakra-ui/select'
+import { Tooltip } from '@chakra-ui/tooltip'
+import { RadioGroup } from '@chakra-ui/radio'
+import { Radio } from '@chakra-ui/radio'
+import { useToast } from '@chakra-ui/toast'
 
 import CyclistTitle from '../assets/icons/cyclist-title.svg'
 import RoadDistance from '../assets/icons/road-distance.svg'
@@ -25,37 +34,85 @@ import Nota from '../assets/icons/nota.svg'
 import Calendar from '../assets/icons/data-limite.svg'
 import ClockHour from '../assets/icons/clock-hour.svg'
 import Sneakers from '../assets/icons/sneakers.svg'
-import { Button } from '@chakra-ui/button'
-import { Select } from '@chakra-ui/select'
-// import { Divider } from '@chakra-ui/layout'
-import { Tooltip } from '@chakra-ui/tooltip'
-import { RadioGroup } from '@chakra-ui/radio'
-import { Radio } from '@chakra-ui/radio'
-// import { Stack } from '@chakra-ui/layout'
-// import { Spacer } from '@chakra-ui/layout'
 
 export default function Create() {
+	const history = useHistory()
+	const access_token = localStorage.getItem('access_token')
+
+	const toast = useToast()
+
 	const [selectDate, setSelectDate] = useState(new Date())
 	const [selectHour, setSelectHour] = useState(new Date())
-	const [workout, setworkout] = React.useState('2')
 
-	// const [dataActicity, setDataActicity] = useState({
-	// 	name: '',
-	// 	description: '',
-	// 	start_date: '2021-05-08T16:37:47Z',
-	// 	type: 'Ride',
-	// 	distance: 0,
-	// 	elapsed_time: 0,
-	// 	workout_type: 12,
-	// 	trainer: true,
-	// })
+	const [duration, setDuration] = useState({
+		hours: '1',
+		minutes: '15',
+		seconds: '30',
+	})
 
-	// const handleDataActicity = prop => event => {
-	// 	setDataActicity({ ...dataActicity, [prop]: event.target.value })
-	// }
+	const [dataActivity, setDataActivity] = useState({
+		name: 'Atividade criada no Stats',
+		description: 'Descrição da atividade feita pelo Stats',
+		type: 'Ride',
+		distance: 20000,
+		workout_type: 12,
+	})
 
-	function handleOnSubmit() {
-		// console.log(dataActicity)
+	const handleDataActivity = prop => event => {
+		setDataActivity({ ...dataActivity, [prop]: event.target.value })
+	}
+
+	const handleDuration = prop => event => {
+		setDuration({ ...duration, [prop]: event })
+	}
+
+	const handleDataActivityNumber = prop => event => {
+		if (prop === 'distance') {
+			setDataActivity({ ...dataActivity, [prop]: event * 1000 })
+		} else {
+			setDataActivity({ ...dataActivity, [prop]: parseInt(event) })
+		}
+	}
+
+	async function handleCreateActivity() {
+		const dd = String(selectDate.getDate()).padStart(2, '0')
+		const mm = String(selectDate.getMonth()).padStart(2, '0')
+		const yyyy = selectDate.getFullYear()
+
+		const hh = String(selectHour.getHours()).padStart(2, '0')
+		const min = String(selectHour.getMinutes()).padStart(2, '0')
+		const ss = String(selectHour.getSeconds()).padStart(2, '0')
+
+		const startDate = new Date(yyyy, mm, dd, hh, min, ss).toISOString()
+
+		const durationInSeconds =
+			parseInt(duration.hours) * 3600 +
+			parseInt(duration.minutes) * 60 +
+			parseInt(duration.seconds)
+
+		const newActivity = {
+			name: dataActivity.name,
+			description: dataActivity.description,
+			start_date: startDate,
+			type: dataActivity.type,
+			distance: dataActivity.distance,
+			elapsed_time: durationInSeconds,
+			workout_type: dataActivity.workout,
+			trainer: true,
+		}
+
+		try {
+			await api.post('activities', newActivity, {
+				headers: {
+					Authorization: `Bearer ${access_token}`,
+					'Content-Type': 'application/json',
+				},
+			})
+
+			history.push('/stats')
+		} catch (err) {
+			console.log(err)
+		}
 	}
 
 	const CustomInput = forwardRef(({ value, onClick }, ref) => (
@@ -105,7 +162,8 @@ export default function Create() {
 						Título da atividade:
 						<Input
 							variant="unstyled"
-							defaultValue="Atividade criada no Stats"
+							defaultValue={dataActivity.name}
+							onChange={handleDataActivity('name')}
 						/>
 					</Container>
 				</Flex>
@@ -141,9 +199,13 @@ export default function Create() {
 						<NumberInput
 							allowMouseWheel
 							variant="unstyled"
-							defaultValue={15}
+							defaultValue={String(dataActivity.distance / 1000).padStart(
+								2,
+								'0'
+							)}
+							onChange={handleDataActivityNumber('distance')}
 							precision={2}
-							step={0.2}
+							step={0.1}
 							min={0}
 							mr={3}
 						>
@@ -186,11 +248,12 @@ export default function Create() {
 					<Container ml={3} mt={2}>
 						Descrição:
 						<Textarea
-							defaultValue="Descrição da atividade feita pelo Stats"
 							size="md"
 							resize="none"
 							variant="unstyled"
 							minHeight="80%"
+							defaultValue={dataActivity.description}
+							onChange={handleDataActivity('description')}
 						/>
 					</Container>
 				</Flex>
@@ -226,21 +289,23 @@ export default function Create() {
 						<NumberInput
 							allowMouseWheel
 							variant="unstyled"
-							defaultValue={1}
+							defaultValue={String(duration.hours).padStart(2, '0')}
+							onChange={handleDuration('hours')}
 							step={1}
 							min={0}
-							max={9}
+							max={99}
 							mr={3}
 						>
 							<Flex>
-								<NumberInputField pr={0} w="0.8rem" />
+								<NumberInputField pr={0} w="1.3rem" />
 								<InputRightAddon children="h" />
 							</Flex>
 						</NumberInput>
 						<NumberInput
 							allowMouseWheel
 							variant="unstyled"
-							defaultValue={15}
+							defaultValue={String(duration.minutes).padStart(2, '0')}
+							onChange={handleDuration('minutes')}
 							step={1}
 							min={0}
 							max={60}
@@ -254,7 +319,8 @@ export default function Create() {
 						<NumberInput
 							allowMouseWheel
 							variant="unstyled"
-							defaultValue={15}
+							defaultValue={String(duration.seconds).padStart(2, '0')}
+							onChange={handleDuration('seconds')}
 							step={1}
 							min={0}
 							max={60}
@@ -332,7 +398,11 @@ export default function Create() {
 						<Text mr={4} fontSize="lg">
 							Tipo:
 						</Text>
-						<Select variant="unstyled" defaultValue={`Ride`}>
+						<Select
+							variant="unstyled"
+							defaultValue={dataActivity.type}
+							onChange={handleDataActivity('type')}
+						>
 							<option value="Ride">pedalada</option>
 							<option value="Run">corrida</option>
 						</Select>
@@ -389,15 +459,19 @@ export default function Create() {
 				justifyContent="center"
 				alignItems="center"
 			>
-				<RadioGroup onChange={setworkout} value={workout} w="65%">
+				<RadioGroup
+					onChange={handleDataActivityNumber('workout_type')}
+					value={dataActivity.workout_type.toString()}
+					w="65%"
+				>
 					<Flex>
 						<Container>
-							<Radio colorScheme="white" value="1">
+							<Radio colorScheme="white" value="10">
 								<Text fontSize="xl">Prova</Text>
 							</Radio>
 						</Container>
 						<Container align="center">
-							<Radio colorScheme="white" value="2">
+							<Radio colorScheme="white" value="12">
 								{' '}
 								<Text fontSize="xl">Treino</Text>
 							</Radio>
@@ -420,7 +494,17 @@ export default function Create() {
 						transform: 'scale(0.98)',
 					}}
 					color="white"
-					onClick={handleOnSubmit()}
+					onClick={() => {
+						return (
+							handleCreateActivity(),
+							toast({
+								title: 'Atividade criada com sucesso.',
+								status: 'success',
+								duration: 3000,
+								isClosable: true,
+							})
+						)
+					}}
 				>
 					CRIAR
 				</Button>
