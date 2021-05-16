@@ -29,10 +29,15 @@ import { Button } from '@chakra-ui/button'
 import { Select } from '@chakra-ui/select'
 import { Divider } from '@chakra-ui/layout'
 import { Tooltip } from '@chakra-ui/tooltip'
+import { RadioGroup } from '@chakra-ui/radio'
+import { Radio } from '@chakra-ui/radio'
+import { Stack } from '@chakra-ui/layout'
+import { Spacer } from '@chakra-ui/layout'
 
 export default function Create() {
 	const [selectDate, setSelectDate] = useState(new Date())
 	const [selectHour, setSelectHour] = useState(new Date())
+	const [workout, setworkout] = React.useState('2')
 
 	const [dataActicity, setDataActicity] = useState({
 		name: '',
@@ -117,7 +122,7 @@ export default function Create() {
 				<Flex h="100%" align="center">
 					<Flex h="100%" align="center">
 						<Tooltip
-							label="Digite aqui o distância da sua atividade"
+							label="Digite aqui a distância percorrida da sua atividade"
 							fontSize="sm"
 						>
 							<Image
@@ -140,15 +145,12 @@ export default function Create() {
 							precision={2}
 							step={0.2}
 							min={0}
+							mr={3}
 						>
 							<Flex>
-								<NumberInputField pr={0} w="auto" />
+								<NumberInputField pr={0} w="3.5rem" />
 								<InputRightAddon children="km" />
 							</Flex>
-							{/* <NumberInputStepper>
-								<NumberIncrementStepper />
-								<NumberDecrementStepper />
-							</NumberInputStepper> */}
 						</NumberInput>
 					</Flex>
 				</Flex>
@@ -167,7 +169,7 @@ export default function Create() {
 				<Flex h="100%">
 					<Flex h="100%" align="center">
 						<Tooltip
-							label="Digite aqui o descrição da sua atividade"
+							label="Digite aqui a descrição da sua atividade"
 							fontSize="sm"
 						>
 							<Image
@@ -311,7 +313,10 @@ export default function Create() {
 			>
 				<Flex h="100%" align="center">
 					<Flex h="100%" align="center">
-						<Tooltip label="Digite aqui o tipo da sua atividade" fontSize="sm">
+						<Tooltip
+							label="Escolha aqui a modalidade da sua atividade"
+							fontSize="sm"
+						>
 							<Image
 								src={Sneakers}
 								boxSize="2.5rem"
@@ -380,16 +385,25 @@ export default function Create() {
 				color="white"
 				borderRadius="2xl"
 				shadow="dark-lg"
+				display="flex"
+				justifyContent="center"
+				alignItems="center"
 			>
-				<Flex h="100%" align="center">
-					<Container align="center">
-						<Text fontSize="xl">Prova</Text>
-					</Container>
-					<Divider orientation="vertical" h="75%" />
-					<Container align="center">
-						<Text fontSize="xl">Treino</Text>
-					</Container>
-				</Flex>
+				<RadioGroup onChange={setworkout} value={workout} w="65%">
+					<Flex>
+						<Container>
+							<Radio colorScheme="white" value="1">
+								<Text fontSize="xl">Prova</Text>
+							</Radio>
+						</Container>
+						<Container align="center">
+							<Radio colorScheme="white" value="2">
+								{' '}
+								<Text fontSize="xl">Treino</Text>
+							</Radio>
+						</Container>
+					</Flex>
+				</RadioGroup>
 			</GridItem>
 
 			<GridItem colSpan={2} borderRadius="2xl" shadow="dark-lg">
