@@ -27,35 +27,35 @@ import ClockHour from '../assets/icons/clock-hour.svg'
 import Sneakers from '../assets/icons/sneakers.svg'
 import { Button } from '@chakra-ui/button'
 import { Select } from '@chakra-ui/select'
-import { Divider } from '@chakra-ui/layout'
+// import { Divider } from '@chakra-ui/layout'
 import { Tooltip } from '@chakra-ui/tooltip'
 import { RadioGroup } from '@chakra-ui/radio'
 import { Radio } from '@chakra-ui/radio'
-import { Stack } from '@chakra-ui/layout'
-import { Spacer } from '@chakra-ui/layout'
+// import { Stack } from '@chakra-ui/layout'
+// import { Spacer } from '@chakra-ui/layout'
 
 export default function Create() {
 	const [selectDate, setSelectDate] = useState(new Date())
 	const [selectHour, setSelectHour] = useState(new Date())
 	const [workout, setworkout] = React.useState('2')
 
-	const [dataActicity, setDataActicity] = useState({
-		name: '',
-		description: '',
-		start_date: '2021-05-08T16:37:47Z',
-		type: 'Ride',
-		distance: 0,
-		elapsed_time: 0,
-		workout_type: 12,
-		trainer: true,
-	})
+	// const [dataActicity, setDataActicity] = useState({
+	// 	name: '',
+	// 	description: '',
+	// 	start_date: '2021-05-08T16:37:47Z',
+	// 	type: 'Ride',
+	// 	distance: 0,
+	// 	elapsed_time: 0,
+	// 	workout_type: 12,
+	// 	trainer: true,
+	// })
 
-	const handleDataActicity = prop => event => {
-		setDataActicity({ ...dataActicity, [prop]: event.target.value })
-	}
+	// const handleDataActicity = prop => event => {
+	// 	setDataActicity({ ...dataActicity, [prop]: event.target.value })
+	// }
 
 	function handleOnSubmit() {
-		console.log(dataActicity)
+		// console.log(dataActicity)
 	}
 
 	const CustomInput = forwardRef(({ value, onClick }, ref) => (
