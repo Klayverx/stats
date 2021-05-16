@@ -187,35 +187,87 @@ export default function Stats() {
 				color="white"
 				borderRadius="2xl"
 				shadow="dark-lg"
+				p={7}
 			>
-				<Flex p={8} direction="column">
-					<Text fontSize="xl" fontWeight="bold" mb={2}>
+				<Flex direction="column" h="100%">
+					<Text fontSize="xl" fontWeight="bold" mb={3}>
 						Última atividade 🚲
 					</Text>
-					<Text fontSize="lg" lineHeight={8}>
-						Título: {location.state?.lastActivity.name || 'Título da atividade'}
-					</Text>
-					<Text fontSize="lg" lineHeight={8}>
-						Distância:{' '}
-						{Math.floor(location.state?.lastActivity.distance / 1000) || 0} km
-					</Text>
-					<Text fontSize="lg" lineHeight={8}>
-						Elevação:{' '}
-						{Math.floor(location.state?.lastActivity.total_elevation_gain) || 0}{' '}
-						m
-					</Text>
-					<Text fontSize="lg" lineHeight={8}>
-						Kudos: {location.state?.lastActivity.kudos_count || 0}
-					</Text>
-					<Text fontSize="lg" lineHeight={8}>
-						Vel. média:{' '}
-						{Math.floor(location.state?.lastActivity.average_speed * 3.6) || 0}{' '}
-						km/h
-					</Text>
-					<Text fontSize="lg" lineHeight={8}>
-						Vel. máxima:{' '}
-						{Math.floor(location.state?.lastActivity.max_speed * 3.6) || 0} km/h
-					</Text>
+					<Flex>
+						<Container fontSize="lg" lineHeight={8}>
+							Título:
+						</Container>
+
+						<Container textAlign="center" fontSize="lg" lineHeight={8}>
+							{location.state?.lastActivity.name || 'Título da atividade'}
+						</Container>
+					</Flex>
+					<Spacer />
+					<Divider />
+					<Spacer />
+					<Flex>
+						<Container fontSize="lg" lineHeight={8}>
+							Distância:
+						</Container>
+
+						<Container textAlign="center" fontSize="lg" lineHeight={8}>
+							{Math.floor(location.state?.lastActivity.distance / 1000) || 0} km
+						</Container>
+					</Flex>
+					<Spacer />
+					<Divider />
+					<Spacer />
+					<Flex>
+						<Container fontSize="lg" lineHeight={8}>
+							Elevação:
+						</Container>
+
+						<Container textAlign="center" fontSize="lg" lineHeight={8}>
+							{Math.floor(location.state?.lastActivity.total_elevation_gain) ||
+								0}{' '}
+							m
+						</Container>
+					</Flex>
+					<Spacer />
+					<Divider />
+					<Spacer />
+					<Flex>
+						<Container fontSize="lg" lineHeight={8}>
+							Kudos:
+						</Container>
+
+						<Container textAlign="center" fontSize="lg" lineHeight={8}>
+							{location.state?.lastActivity.kudos_count || 0}
+						</Container>
+					</Flex>
+					<Spacer />
+					<Divider />
+					<Spacer />
+					<Flex>
+						<Container fontSize="lg" lineHeight={8}>
+							Vel. média:
+						</Container>
+
+						<Container textAlign="center" fontSize="lg" lineHeight={8}>
+							{Math.floor(location.state?.lastActivity.average_speed * 3.6) ||
+								0}{' '}
+							km/h
+						</Container>
+					</Flex>
+					<Spacer />
+					<Divider />
+					<Spacer />
+					<Flex>
+						<Container fontSize="lg" lineHeight={8}>
+							Vel. máxima:
+						</Container>
+
+						<Container textAlign="center" fontSize="lg" lineHeight={8}>
+							{Math.floor(location.state?.lastActivity.max_speed * 3.6) || 0}{' '}
+							km/h
+						</Container>
+					</Flex>
+					<Spacer />
 				</Flex>
 			</GridItem>
 		</Grid>
