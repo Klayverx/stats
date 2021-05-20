@@ -89,7 +89,8 @@ function Layout({ children }) {
 							transform: 'scale(1.03)',
 						}}
 						onClick={
-							(() => history.push('/stats'), setPageName('Estatísticas 📊'))
+							(() => history.push('/stats'),
+							() => setPageName('Estatísticas 📊'))
 						}
 					>
 						<Image src={BarChart} alt="BarChart" width="4.2rem" />
@@ -104,7 +105,8 @@ function Layout({ children }) {
 							transform: 'scale(1.03)',
 						}}
 						onClick={
-							(() => history.push('/create'), setPageName('Criar atividade 🚴🏽‍♂️'))
+							(() => history.push('/create'),
+							() => setPageName('Criar atividade 🚴🏽‍♂️'))
 						}
 					>
 						<Image src={Road} alt="Road" width="4.2rem" />
