@@ -56,6 +56,11 @@ function Layout({ children }) {
 		// eslint-disable-next-line
 	}, [])
 
+	function changePage(url, pageName) {
+		history.push(`/${url}`)
+		setPageName(pageName)
+	}
+
 	return (
 		<Flex h="100vh">
 			<VStack h="100%" w="16rem" bg="primary" spacing={4}>
@@ -88,10 +93,7 @@ function Layout({ children }) {
 						_hover={{
 							transform: 'scale(1.03)',
 						}}
-						onClick={
-							(() => history.push('/stats'),
-							() => setPageName('Estatísticas 📊'))
-						}
+						onClick={() => changePage('stats', 'Estatísticas 📊')}
 					>
 						<Image src={BarChart} alt="BarChart" width="4.2rem" />
 						<Text color="white" fontWeight="bold">
@@ -104,10 +106,7 @@ function Layout({ children }) {
 						_hover={{
 							transform: 'scale(1.03)',
 						}}
-						onClick={
-							(() => history.push('/create'),
-							() => setPageName('Criar atividade 🚴🏽‍♂️'))
-						}
+						onClick={() => changePage('create', 'Criar atividade 🚴🏽‍♂️')}
 					>
 						<Image src={Road} alt="Road" width="4.2rem" />
 						<Text color="white" fontWeight="bold">
@@ -122,11 +121,7 @@ function Layout({ children }) {
 						_hover={{
 							transform: 'scale(1.03)',
 						}}
-						onClick={() => {
-							return (
-								history.push('/equipaments'), setPageName('Equipamentos 🚲')
-							)
-						}}
+						onClick={() => changePage('equipaments', 'Equipamentos 🚲')}
 					>
 						<Image src={Bicycle} alt="Bicycle" width="5rem" align="center" />
 						<Text color="white" fontWeight="bold">
