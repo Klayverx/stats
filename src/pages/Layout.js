@@ -88,9 +88,9 @@ function Layout({ children }) {
 						_hover={{
 							transform: 'scale(1.03)',
 						}}
-						onClick={() => {
-							return history.push('/stats'), setPageName('Estatísticas 📊')
-						}}
+						onClick={
+							(() => history.push('/stats'), setPageName('Estatísticas 📊'))
+						}
 					>
 						<Image src={BarChart} alt="BarChart" width="4.2rem" />
 						<Text color="white" fontWeight="bold">
@@ -103,9 +103,9 @@ function Layout({ children }) {
 						_hover={{
 							transform: 'scale(1.03)',
 						}}
-						onClick={() => {
-							return history.push('/create'), setPageName('Criar atividade 🚴🏽‍♂️')
-						}}
+						onClick={
+							(() => history.push('/create'), setPageName('Criar atividade 🚴🏽‍♂️'))
+						}
 					>
 						<Image src={Road} alt="Road" width="4.2rem" />
 						<Text color="white" fontWeight="bold">
