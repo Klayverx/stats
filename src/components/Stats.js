@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router'
 
 import { Image } from '@chakra-ui/image'
 import {
