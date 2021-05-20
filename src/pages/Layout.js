@@ -15,13 +15,12 @@ import { api } from '../services/api'
 
 function Layout({ children }) {
 	const history = useHistory()
-	// let URL = window.location.href
 
 	const [pageName, setPageName] = useState('')
 
 	const [dataAthlete, setDataAthlete] = useState({})
-	const [athleteStats, setAthleteStats] = useState({})
-	const [lastActivity, setLastActivity] = useState({})
+	// const [athleteStats, setAthleteStats] = useState({})
+	// const [lastActivity, setLastActivity] = useState({})
 	const access_token = localStorage.getItem('access_token')
 
 	useEffect(() => {
@@ -34,25 +33,24 @@ function Layout({ children }) {
 			})
 			setDataAthlete(request.data)
 
-			// última atividade
-			const request2 = await api.get('athlete/activities', {
-				headers: {
-					Authorization: `Bearer ${access_token}`,
-				},
-			})
-			setLastActivity(request2.data[0])
+			// // última atividade
+			// const request2 = await api.get('athlete/activities', {
+			// 	headers: {
+			// 		Authorization: `Bearer ${access_token}`,
+			// 	},
+			// })
+			// setLastActivity(request2.data[0])
 
-			// estatísticas do atleta
-			const request3 = await api.get(`athletes/${request.data.id}/stats`, {
-				headers: {
-					Authorization: `Bearer ${access_token}`,
-				},
-			})
-			setAthleteStats(request3.data)
+			// // estatísticas do atleta
+			// const request3 = await api.get(`athletes/${request.data.id}/stats`, {
+			// 	headers: {
+			// 		Authorization: `Bearer ${access_token}`,
+			// 	},
+			// })
+			// setAthleteStats(request3.data)
 		}
 
 		getDataAthlete()
-
 		setPageName('Estatísticas 📊')
 
 		// eslint-disable-next-line
@@ -91,14 +89,7 @@ function Layout({ children }) {
 							transform: 'scale(1.03)',
 						}}
 						onClick={() => {
-							return (
-								history.push('/stats', {
-									athleteStats,
-									dataAthlete,
-									lastActivity,
-								}),
-								setPageName('Estatísticas 📊')
-							)
+							return history.push('/stats'), setPageName('Estatísticas 📊')
 						}}
 					>
 						<Image src={BarChart} alt="BarChart" width="4.2rem" />

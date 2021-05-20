@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
 
 import { Image } from '@chakra-ui/image'
@@ -15,9 +15,46 @@ import {
 
 import Cyclist from '../assets/icons/cyclist.svg'
 import Cyclists from '../assets/icons/cyclists.svg'
+import { api } from '../services/api'
 
 export default function Stats() {
-	const location = useLocation()
+	const access_token = localStorage.getItem('access_token')
+
+	const [dataAthlete, setDataAthlete] = useState({})
+	const [athleteStats, setAthleteStats] = useState({})
+	const [lastActivity, setLastActivity] = useState({})
+
+	useEffect(() => {
+		async function getDataAthlete() {
+			// dados do atleta
+			const request = await api.get('athlete', {
+				headers: {
+					Authorization: `Bearer ${access_token}`,
+				},
+			})
+			setDataAthlete(request.data)
+
+			// última atividade
+			const request2 = await api.get('athlete/activities', {
+				headers: {
+					Authorization: `Bearer ${access_token}`,
+				},
+			})
+			setLastActivity(request2.data[0])
+
+			// estatísticas do atleta
+			const request3 = await api.get(`athletes/${request.data.id}/stats`, {
+				headers: {
+					Authorization: `Bearer ${access_token}`,
+				},
+			})
+			setAthleteStats(request3.data)
+		}
+
+		getDataAthlete()
+
+		// eslint-disable-next-line
+	}, [])
 
 	return (
 		<Grid
@@ -47,9 +84,7 @@ export default function Stats() {
 						<Spacer />
 						<Center alignItems="baseline">
 							<Text fontSize="5xl" fontWeight="bold">
-								{Math.floor(
-									location.state?.athleteStats.all_ride_totals?.distance / 1000
-								).toLocaleString('pt-BR') || 0}
+								{Math.floor(athleteStats.all_ride_totals?.distance / 1000) || 0}
 							</Text>
 							<Text fontSize="2xl" fontWeight="bold">
 								{' '}
@@ -66,9 +101,8 @@ export default function Stats() {
 						<Center alignItems="baseline">
 							<Text fontSize="5xl" fontWeight="bold">
 								{Math.floor(
-									location.state?.athleteStats.all_ride_totals?.elevation_gain /
-										10
-								).toLocaleString('pt-BR') || 0}
+									athleteStats.all_ride_totals?.elevation_gain / 10
+								) || 0}
 							</Text>
 							<Text fontSize="2xl" fontWeight="bold">
 								{' '}
@@ -94,9 +128,7 @@ export default function Stats() {
 						<Spacer />
 						<Center alignItems="baseline">
 							<Text fontSize="5xl" fontWeight="bold">
-								{Math.floor(
-									location.state?.athleteStats.biggest_ride_distance / 1000
-								) || 0}
+								{Math.floor(athleteStats.biggest_ride_distance / 1000) || 0}
 							</Text>
 							<Text fontSize="2xl" fontWeight="bold">
 								km
@@ -111,9 +143,7 @@ export default function Stats() {
 						<Spacer />
 						<Center alignItems="baseline">
 							<Text fontSize="5xl" fontWeight="bold">
-								{Math.floor(
-									location.state?.athleteStats.biggest_climb_elevation_gain
-								).toLocaleString('pt-BR') || 0}
+								{Math.floor(athleteStats.biggest_climb_elevation_gain) || 0}
 							</Text>
 							<Text fontSize="2xl" fontWeight="bold">
 								{' '}
@@ -142,9 +172,8 @@ export default function Stats() {
 						</Text>
 						<Center>
 							<Text fontSize="5xl" fontWeight="bold">
-								{location.state?.athleteStats.all_ride_totals?.count.toLocaleString(
-									'pt-BR'
-								) || 0}
+								{athleteStats.all_ride_totals?.count.toLocaleString('pt-BR') ||
+									0}
 							</Text>
 						</Center>
 					</Container>
@@ -170,9 +199,7 @@ export default function Stats() {
 
 						<Center>
 							<Text fontSize="5xl" fontWeight="bold">
-								{location.state?.dataAthlete.clubs?.length.toLocaleString(
-									'pt-BR'
-								) || 0}
+								{dataAthlete.clubs?.length.toLocaleString('pt-BR') || 0}
 							</Text>
 						</Center>
 					</Container>
@@ -199,7 +226,7 @@ export default function Stats() {
 						</Container>
 
 						<Container textAlign="center" fontSize="lg" lineHeight={8}>
-							{location.state?.lastActivity.name || 'Título da atividade'}
+							{lastActivity.name || 'Título da atividade'}
 						</Container>
 					</Flex>
 					<Spacer />
@@ -211,7 +238,7 @@ export default function Stats() {
 						</Container>
 
 						<Container textAlign="center" fontSize="lg" lineHeight={8}>
-							{Math.floor(location.state?.lastActivity.distance / 1000) || 0} km
+							{Math.floor(lastActivity.distance / 1000) || 0} km
 						</Container>
 					</Flex>
 					<Spacer />
@@ -223,9 +250,7 @@ export default function Stats() {
 						</Container>
 
 						<Container textAlign="center" fontSize="lg" lineHeight={8}>
-							{Math.floor(location.state?.lastActivity.total_elevation_gain) ||
-								0}{' '}
-							m
+							{Math.floor(lastActivity.total_elevation_gain) || 0} m
 						</Container>
 					</Flex>
 					<Spacer />
@@ -237,7 +262,7 @@ export default function Stats() {
 						</Container>
 
 						<Container textAlign="center" fontSize="lg" lineHeight={8}>
-							{location.state?.lastActivity.kudos_count || 0}
+							{lastActivity.kudos_count || 0}
 						</Container>
 					</Flex>
 					<Spacer />
@@ -249,9 +274,7 @@ export default function Stats() {
 						</Container>
 
 						<Container textAlign="center" fontSize="lg" lineHeight={8}>
-							{Math.floor(location.state?.lastActivity.average_speed * 3.6) ||
-								0}{' '}
-							km/h
+							{Math.floor(lastActivity.average_speed * 3.6) || 0} km/h
 						</Container>
 					</Flex>
 					<Spacer />
@@ -263,8 +286,7 @@ export default function Stats() {
 						</Container>
 
 						<Container textAlign="center" fontSize="lg" lineHeight={8}>
-							{Math.floor(location.state?.lastActivity.max_speed * 3.6) || 0}{' '}
-							km/h
+							{Math.floor(lastActivity.max_speed * 3.6) || 0} km/h
 						</Container>
 					</Flex>
 					<Spacer />
