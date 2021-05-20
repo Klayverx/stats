@@ -15,6 +15,9 @@ import { api } from '../services/api'
 
 function Layout({ children }) {
 	const history = useHistory()
+	// let URL = window.location.href
+
+	const [pageName, setPageName] = useState('')
 
 	const [dataAthlete, setDataAthlete] = useState({})
 	const [athleteStats, setAthleteStats] = useState({})
@@ -49,6 +52,8 @@ function Layout({ children }) {
 		}
 
 		getDataAthlete()
+
+		setPageName('Estatísticas 📊')
 
 		// eslint-disable-next-line
 	}, [])
@@ -85,13 +90,16 @@ function Layout({ children }) {
 						_hover={{
 							transform: 'scale(1.03)',
 						}}
-						onClick={() =>
-							history.push('/stats', {
-								athleteStats,
-								dataAthlete,
-								lastActivity,
-							})
-						}
+						onClick={() => {
+							return (
+								history.push('/stats', {
+									athleteStats,
+									dataAthlete,
+									lastActivity,
+								}),
+								setPageName('Estatísticas 📊')
+							)
+						}}
 					>
 						<Image src={BarChart} alt="BarChart" width="4.2rem" />
 						<Text color="white" fontWeight="bold">
@@ -104,7 +112,9 @@ function Layout({ children }) {
 						_hover={{
 							transform: 'scale(1.03)',
 						}}
-						onClick={() => history.push('/create')}
+						onClick={() => {
+							return history.push('/create'), setPageName('Criar atividade 🚴🏽‍♂️')
+						}}
 					>
 						<Image src={Road} alt="Road" width="4.2rem" />
 						<Text color="white" fontWeight="bold">
@@ -119,7 +129,11 @@ function Layout({ children }) {
 						_hover={{
 							transform: 'scale(1.03)',
 						}}
-						onClick={() => history.push('/equipaments')}
+						onClick={() => {
+							return (
+								history.push('/equipaments'), setPageName('Equipamentos 🚲')
+							)
+						}}
 					>
 						<Image src={Bicycle} alt="Bicycle" width="5rem" align="center" />
 						<Text color="white" fontWeight="bold">
@@ -144,7 +158,7 @@ function Layout({ children }) {
 			<Flex w="100%" direction="column">
 				<Flex bg="primary" h="3rem" w="100%" p={8} align="center">
 					<Text color="white" fontSize="2xl" fontWeight="bold">
-						Estatísticas 📊
+						{pageName}
 					</Text>
 
 					<Spacer />
