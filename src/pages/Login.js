@@ -32,7 +32,7 @@ export default function Login() {
 				p={8}
 				pl={12}
 				zIndex={1}
-				clipPath="polygon(0 0, 40% 0, 65% 100%, 0% 100%)"
+				clipPath="polygon(0 0, 42vw 0, 65% 100%, 0% 100%)"
 			>
 				<Spacer />
 				<Image width="12rem" src={Stats} alt="Stats"></Image>
@@ -74,7 +74,13 @@ export default function Login() {
 				<Spacer />
 			</Flex>
 			<Box h="100vh" position="absolute" right="0">
-				<Image h="100%" src={ImgLogin} alt="Segun Adebayo" />
+				<Image
+					h="100%"
+					minWidth="58vw"
+					backgroundSize="contain"
+					src={ImgLogin}
+					alt="Ciclist Cover"
+				/>
 				<Button
 					bg="primary"
 					_hover={{
